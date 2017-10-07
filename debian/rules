@@ -8,6 +8,7 @@ debian_ldflags:=$(shell dpkg-buildflags --get LDFLAGS) -fPIC
 FLAVOURS := full light extras
 DYN_MODS := \
 	http-auth-pam \
+	http-auth-spnego \
 	http-cache-purge \
 	http-dav-ext \
 	http-echo \
@@ -125,6 +126,7 @@ extras_configure_flags := \
 			--with-stream_ssl_preread_module \
 			--add-dynamic-module=$(MODULESDIR)/headers-more-nginx-module \
 			--add-dynamic-module=$(MODULESDIR)/nginx-auth-pam \
+			--add-dynamic-module=$(MODULESDIR)/nginx-auth-spnego \
 			--add-dynamic-module=$(MODULESDIR)/nginx-cache-purge \
 			--add-dynamic-module=$(MODULESDIR)/nginx-dav-ext-module \
 			--add-dynamic-module=$(MODULESDIR)/nginx-development-kit \

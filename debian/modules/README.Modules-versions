@@ -67,3 +67,7 @@ README for Modules versions
   Homepage: https://github.com/arut/nginx-rtmp-module
     rm -r debian/modules/nginx-rtmp-module/test
   Version: v1.1.11
+
+ spnego-http-auth-nginx-module
+  Homepage: https://github.com/stnoonan/spnego-http-auth-nginx-module
+  Version: 0c6ff3f

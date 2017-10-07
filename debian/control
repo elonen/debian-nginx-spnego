@@ -13,6 +13,7 @@ Build-Depends: debhelper (>= 10),
                libgd-dev,
                libgeoip-dev,
                libhiredis-dev,
+               libkrb5-dev,
                liblua5.1-0-dev [!i386 !amd64 !kfreebsd-i386 !armel !armhf !powerpc !powerpcspe !mips !mipsel],
                libluajit-5.1-dev [i386 amd64 kfreebsd-i386 armel armhf powerpc powerpcspe mips mipsel],
                libmhash-dev,
@@ -139,6 +140,7 @@ Description: nginx web/proxy server (basic version)
 Package: nginx-extras
 Architecture: any
 Depends: libnginx-mod-http-auth-pam (= ${binary:Version}),
+         libnginx-mod-http-auth-spnego (= ${binary:Version}),
          libnginx-mod-http-cache-purge (= ${binary:Version}),
          libnginx-mod-http-dav-ext (= ${binary:Version}),
          libnginx-mod-http-echo (= ${binary:Version}),
@@ -256,6 +258,16 @@ Description: PAM authentication module for Nginx
  .
  The module uses PAM as a backend for simple http authentication. It
  also allows setting the pam service name to allow more fine grained control.
+
+Package: libnginx-mod-http-auth-spnego
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: SPNEGO Kerberos authentication module for Nginx
+ The nginx_http_auth_spnego module enables authentication using Kerberos via GSSAPI.
+ .
+ The module uses SPNEGO / Kerberos as a backend for http authentication. It
+ allows single-sign-on (SSO) on Windows Domain environments, as well as Basic auth
+ (username and password) as a fallback.
 
 Package: libnginx-mod-http-lua
 Architecture: any

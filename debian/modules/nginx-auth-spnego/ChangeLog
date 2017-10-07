@@ -1,0 +1,604 @@
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Mon Mar 16 15:23:37 2015 -0400
+
+    Link to libgssapi in FreeBSD
+    
+    This fixes the inability of this module to compile
+    on FreeBSD 10.1
+
+commit e59a22d3cf78fe756d7b381ad0b88dfd7fa9aad6
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Oct 21 21:13:12 2014 -0400
+
+    Add additional log and debug statements for bogus auth
+
+commit fa728d2de80001d41f539783b21977a4aa493c65
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Oct 1 20:54:21 2014 -0400
+
+    Describe bogus auth header in readme
+    
+    Closes #25
+
+commit 7292bce3d890f67288464939e0ce4c775e2337fe
+Merge: 02df21c b916c72
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Thu Aug 21 22:01:02 2014 -0400
+
+    Merge pull request #24 from neirbowj/illuminated_bogus
+    
+    Hint at the origin of the bogus password
+
+commit b916c7235fa1e3db669e57c89db1baae79151574
+Author: John W. O'Brien <john@saltant.com>
+Date:   Thu Aug 21 21:29:39 2014 -0400
+
+    Hint at the origin of the bogus password
+
+commit 02df21c146858ac1a424ee525341027c18e022a6
+Merge: d9af45f d536d2e
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Aug 19 21:49:10 2014 -0400
+
+    Merge branch 'gsskrb5_register_acceptor_identity'
+    
+    Closes #22
+
+commit d536d2e80ea47fe9425a7bddb67f61b63560ccde
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Mon Aug 18 20:54:18 2014 -0400
+
+    Correct all arguments and logic for keytabs
+    
+    Must have been three-quarters asleep when I wrote
+    that code.  kt_env for the env variable, kt for the
+    gsskrb5 call.
+
+commit 1ecea2aa9f2c239db94af21ecabe033125e53baa
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Aug 12 22:01:31 2014 -0400
+
+    Test using gsskrb5_register_acceptor_identity
+
+commit d9af45feb24fd63c6436c3323247ed9065f84cbc
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Fri Aug 8 10:12:05 2014 -0400
+
+    Check return value of putenv
+
+commit 54398b3718241107fb57d175619e62913a6e4590
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Jul 19 08:54:27 2014 -0400
+
+    Less specific versions in readme, add help section
+
+commit 2723627ed875a722a805149e4458f1f3ddbba05e
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Jul 19 08:12:47 2014 -0400
+
+    update ChangeLog
+
+commit e1bd59d1308f2ecccd883758ac61bcd0ba73c854
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Jul 19 07:57:17 2014 -0400
+
+    Use strlchr and strncmp where needed
+
+commit de1924735de6c3fec862929efa9684d44c088f6e
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Jul 19 07:33:46 2014 -0400
+
+    Convert remaining sprintf to snprintf
+
+commit 9519ab75de5b63f82fc018c91884b147bd70a670
+Merge: c1ce1d6 52d9c89
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Fri Jul 11 09:07:15 2014 -0400
+
+    Merge pull request #21 from aroth-arsoft/master
+    
+    fix for issue remote_user and realm #19
+
+commit 52d9c89447a27da64743e2e7e40f4ea783565163
+Author: Andreas Roth <aroth@arsoft-online.com>
+Date:   Fri Jul 11 14:01:06 2014 +0200
+
+    use ngx_strncmp instead of ngx_strcmp to ensure to compare only the
+    valid part of the realm
+
+commit c1ce1d642ef38b59896182ef4a34418283132644
+Merge: 9430baa 70f4095
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Jun 24 21:41:06 2014 -0400
+
+    Merge branch 'master' of github.com:stnoonan/spnego-http-auth-nginx-module
+
+commit 9430baa9ec1bf2d537ddbb93c166e98d3db89057
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Jun 24 21:40:55 2014 -0400
+
+    Update ChangeLog
+
+commit 8cc8aa56e402da9057a66374040c0b8604069dec
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Jun 24 21:40:40 2014 -0400
+
+    Add missing semicolon in spnego_log_krb5_error
+    
+    This resolves compilation errors when --with-debug is passed
+    to the configure script.
+    
+    Closes #18
+
+commit 70f4095ce0dc9e9469e244bd1d238231c7e27b40
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Jun 18 20:57:32 2014 -0400
+
+    Clarify the behavior of the module when realm is specified
+    
+    The default realm is stripped, auth_gss_format_full can be used
+    to override this behavior.
+
+commit 34b74d3185b38720754cf677b2a8eb82682587e3
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Jun 18 19:44:07 2014 -0400
+
+    Replace deprecated krb5_get_init_creds_opt_init()
+    
+    The preferred method is to use krb5_get_init_creds_opt_{alloc,free},
+    as it removes a static structure that is unable to be extended.
+    
+    With credit to MAXuk
+
+commit cf04148da10b1e4ce295f9617dcf822045bf9dbf
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Jun 18 19:35:44 2014 -0400
+
+    Use krb5_get_error_message
+    
+    Contributed by planbnet.  This should provide extended
+    error messages from the underlying krb5 library when
+    there are failures.
+
+commit 4a43f2f35749b38c36ffff7474284f91c1a59b8e
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Jun 18 19:06:20 2014 -0400
+
+    Add dependency information to README.md
+    
+    Closes #16.
+
+commit 50b24e59c0925b42a0b3e60401ee3741b1d46717
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Apr 22 09:10:26 2014 -0400
+
+    allow auth_gss directives in limit_except blocks
+
+commit 46e400cb87f3576a27731cce11c2f6f421a7cefd
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Oct 16 21:55:08 2013 -0400
+
+    Update ChangeLog and README
+
+commit d335e081f6823276c18c1fce1cc195e57a3c83af
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Oct 16 21:43:55 2013 -0400
+
+    Return 403 when user is unauthorized
+    
+    These changes disallow the continuous retries and provide for
+    significantly better behavior when used with Chrome
+    
+    Fixes stnoonan/spnego-http-auth-nginx-module#9
+
+commit 52bd58009d68d9e94664ac8c77139431267e9cf6
+Merge: a18b188 60ab7e3
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Wed Oct 16 06:15:36 2013 -0700
+
+    Merge pull request #10 from MAXuk/patch-1
+    
+    Include com_err.h to define error_message
+    
+    Remove make error: "warning: implicit declaration of function 'error_message'"
+
+commit 60ab7e330f06c2dc329f1e82e99d0fb9a94cfac5
+Author: MAXuk <max-2209@mail.ru>
+Date:   Wed Oct 16 16:58:26 2013 +0400
+
+    Remove "warning: implicit declaration of function 'error_message'"
+    
+    "
+    cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g -I /usr/local/include  -I src/core  -I src/event  -I src/event/modules  -I src/os/unix  -I zlib-1.2.8  -I objs  -I src/http  -I src/http/modules  -I src/mail  -o objs/addon/spnego-http-auth-nginx-module-master/ngx_http_auth_spnego_module.o  spnego-http-auth-nginx-module-master/ngx_http_auth_spnego_module.c
+    cc1: warnings being treated as errors
+    spnego-http-auth-nginx-module-master/ngx_http_auth_spnego_module.c: In function 'ngx_http_auth_spnego_basic':
+    spnego-http-auth-nginx-module-master/ngx_http_auth_spnego_module.c:496: warning: implicit declaration of function 'error_message'
+    *** [objs/addon/spnego-http-auth-nginx-module-master/ngx_http_auth_spnego_module.o] Error code 1
+    "
+    
+    Remove this error where make nginx --add-module=spnego-http-auth-nginx-module-master
+
+commit a18b18801f0ea75723dd14ad912596788f8cef0d
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Oct 8 16:11:35 2013 -0400
+
+    ChangeLog update
+
+commit 56109515cbef41fe603aaba08f3e0895e3b158f7
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Oct 8 16:08:16 2013 -0400
+
+    Sane header behavior for multiple browsers
+    
+    Sending a token in a 401 causes Chrome to choke
+    Sending multiple NEGOTIATE headers causes Firefox to loop indefinitely
+    trying to authenticate.
+    Added a new ctx entry to track the output token.  This allows the header
+    to be set only once.  Future improvement would be to stop passing
+    both the token and the ctx.
+
+commit 6d90271edb3179055c604ce4d588754513627b78
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Oct 8 12:04:50 2013 -0400
+
+    Update ChangeLog/README to reflect recent changes
+
+commit 13507c52e5d6fdcdf8ff219230a45338a5847173
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Tue Oct 8 12:02:39 2013 -0400
+
+    Do not send token in reponse unless authenticated
+    
+    This causes a parsing error in Google Chrome, causing it to
+    display a 320 instead of a 401.
+
+commit c6c51e7fd02d946a6863106fc27b054252e746a7
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Mon Aug 12 17:52:53 2013 +0000
+
+    pass data, not data address for auth_princs
+
+commit 827a36357998625c9a19ece717bc4c5360984695
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Aug 10 15:28:41 2013 -0400
+
+    add size check of authorized principal
+    
+    The ngx_str*cmp family of functions are thin wrappers around their str*cmp
+    equivalents.  Thus, I am doing the same style check I would do with those.
+    
+    Removes the need for sys/param.h.  Also updated the license file to have
+    the same set of authors.
+
+commit 21eea473622bbf8aca13da88430ef68dcb5ba50a
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Aug 10 14:01:21 2013 -0400
+
+    Correct usage of ngx_strncmp with ngx_str_t
+
+commit 4d68e56121fc8bce663ab7b84857a6f4dd2281f2
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Aug 10 12:51:46 2013 -0400
+
+    Provide a way to disable basic auth
+    
+    While some of us would like to think every communication
+    occurs over SSL, this is a pipe dream.  SPNEGO can be
+    perfectly fine over an unencrypted channel.  Basic auth
+    cannot be.  Closes #6.
+
+commit 88c10bd2e72745f46c87c3f802f01a2248491abd
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Aug 10 12:17:00 2013 -0400
+
+    Update ChangeLog
+
+commit 524f70b58e776d7471aa3fda820b7bf5011a6fff
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Sat Aug 10 12:16:40 2013 -0400
+
+    Correct comparison of authorized principal len
+    
+    Fixes #7
+
+commit ee771851afaba99ebadc616b909bc41762a852b0
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Tue Jul 16 17:38:56 2013 +0000
+
+    Add auth_gss_authorized_principal support
+    
+    This can be used to specify a list of principals that are allowed to authenticate
+
+commit 0b40e9adaf2873578ef459ba22fda502b0e4f078
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Fri Jul 12 20:11:26 2013 +0000
+
+    Fix compile error after haphazard NTLM addition
+
+commit 2592edb043f996bbfb3a1c8792752d6bcfb9427c
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Fri Jul 12 16:01:55 2013 -0400
+
+    Update README.md
+
+commit 9fb57c5b043076be41d25281bd48769f4052a3e5
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Fri Jul 12 19:54:57 2013 +0000
+
+    Update documentation
+
+commit 21995ec282ce04299d630e4fa87f2c9357b8328e
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Fri Jul 12 19:48:27 2013 +0000
+
+    Update documentation
+
+commit 81a26f9e98eb2311ba2c6e81e9adcad85b2d59be
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Fri Jul 12 19:10:30 2013 +0000
+
+    Use proper credentials when none are specified
+    
+    Rather than construct specific principal names, the correct behavior is
+    to use GSS_C_NO_CREDENTIAL.
+    
+    Additionally, always send both basic auth and negotiate headers
+
+commit d6ecb02b9fe1bfb7e7eac6b98be6bc133edb9b51
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Thu Jul 11 19:23:49 2013 -0400
+
+    Remove hostname directive from configuration
+
+commit cc5514fd4c002cf70446f447decf806a3c3bd57d
+Merge: 5afe502 a00bb5d
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Thu Jun 6 19:48:31 2013 -0400
+
+    Merge changes due to pull request
+
+commit 5afe5024390e02cf92bbe79eb2131c0a1ad46384
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Thu Jun 6 19:40:46 2013 -0400
+
+    Modify README and remove TODO
+    
+    While the majority usage of this module will be against a Windows domain, that is certainly not the only use case.  We need to be clear that the requirements for Windows are just those and do not necessarily apply across the board.
+
+commit 7f8ac65c7e2683c9a50cca52f3ecaaa738807746
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Thu Jun 6 19:18:16 2013 -0400
+
+    Formatting cleanup
+
+commit a00bb5d4f6c7d8dbedd9cebd8f372e7de2c5ad69
+Merge: 87bb358 413012a
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Thu Jun 6 16:34:41 2013 -0700
+
+    Merge pull request #5 from rbarrois/fix_auth_basic
+    
+    Fix auth basic fallback.
+
+commit 413012a2aa5bbdec4138448d0ff26546a1587b9d
+Author: Raphaël Barrois <raphael.barrois@polytechnique.org>
+Date:   Fri Jun 7 01:28:10 2013 +0200
+
+    Properly send back WWW-Authenticate header on 401 (Closes #4).
+
+commit 5062c25c64cfb0db8eaf3acb03e70b2dc40dbf22
+Author: Raphaël Barrois <raphael.barrois@polytechnique.org>
+Date:   Fri Jun 7 00:27:14 2013 +0200
+
+    Remove buggy calls to ngx_strlen on ngx_str_t.
+
+commit 87bb3581c4764a83517b37210f1c5119c25dc67d
+Merge: f6f5271 cec02d0
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Thu Jun 6 20:25:33 2013 +0000
+
+    Merge basic auth changes from pyhalov
+
+commit f6f5271d6d5ed9297673760e0d263ec2ab6d642d
+Merge: 4e8f13e 57cb988
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Mon May 13 20:09:23 2013 -0700
+
+    Merge pull request #2 from Roguelazer/fix_segfault
+    
+    fix segfault on log
+
+commit 57cb9883d011f3b251a7a18adf318ab2aae166be
+Author: James Brown <jbrown@uber.com>
+Date:   Mon May 13 19:50:48 2013 -0700
+
+    fix segfault on log
+
+commit 4e8f13e16363fc90ecbd0477ec728c96d5f4a8d3
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Mon May 6 11:13:16 2013 -0300
+
+    Update README.md
+    
+    Removed Windows specific references, as they are severely misleading to people working in an MIT/Heimdal only environment.
+
+commit cec02d072286bcfdaefc1edff6f4aaf983369100
+Author: Alexander Pyhalov <alp@sfedu.ru>
+Date:   Wed Apr 10 00:24:41 2013 +0400
+
+    Behave like apache mod_auth_krb5: if Negotiate failed, then try pure basic. Otherwise Windows clients, which doesn't belong to domain, fail.
+
+commit b2f14e233626cda825e3fc0da115a5dbc5ed4031
+Author: Alexander Pyhalov <alp@sfedu.ru>
+Date:   Mon Apr 8 17:55:49 2013 +0400
+
+    Made basic authorization work. Added posibility for using GSSAPI on non-default ports. Alway pass realm to nginx if forced
+
+commit 9bd83699a325a37f17475c3dc106b46ecf86b18e
+Merge: df0769d f332f1c
+Author: Sean Timothy Noonan <stnoonan@obsolescence.net>
+Date:   Fri Apr 5 20:37:04 2013 -0700
+
+    Merge pull request #1 from ifad/master
+    
+    Documentation, enhanced debugging, BOF fixes
+
+commit f332f1c53456f79fd772f017c500aeda9e173ff7
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Tue Feb 19 18:31:37 2013 +0100
+
+    README
+
+commit 6631c8aab6a94236a1470507c086be0595fb40ba
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Tue Feb 19 14:29:36 2013 +0100
+
+    Add myself to the list of authors
+
+commit af8c31d8cab62f417234f47b3365b24e2709f50a
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Tue Feb 19 14:29:30 2013 +0100
+
+    Log the input_token, to debug failures due to NTLMSSP
+
+commit af3a2444207c88d894c39eb08f4a90cbfbefda5c
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Tue Feb 19 14:29:10 2013 +0100
+
+    Silence pointer qualifier ignore warning
+
+commit 70f88935812165ce3f1d68b3bfec7214b7e469ac
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Tue Feb 19 14:28:45 2013 +0100
+
+    Build fully-qualified SPN, using host name if it is not specified in config
+
+commit b8dd3c0fbd885afb5adb93e393d4642fdc40c07a
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Tue Feb 19 14:26:38 2013 +0100
+
+    Fix another BOF
+
+commit 8b1ac33bfad41d3ad81888ff8c2a1b1de11b8676
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Tue Feb 19 14:26:16 2013 +0100
+
+    Fix buffer overflow
+
+commit 3b6b171c1cb8baf0c95379c608090acceed600bc
+Author: Marcello Barnaba <vjt@openssl.it>
+Date:   Mon Feb 18 19:13:32 2013 +0100
+
+    Remove redundant -Wl option
+
+commit df0769d7341981be88bf39b82250ad6ef0edfedd
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Thu Sep 27 14:37:58 2012 +0000
+
+    Correct the length of the host name when there is no port specified
+
+commit 9f04ee459b469627fc92d0c573c4ae1f8933cf82
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Wed Sep 26 21:43:19 2012 +0000
+
+    Update README and bump version in Makefile
+
+commit 44bbdef3f10aa719fa3a150001314ff508e08f87
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Wed Sep 26 21:10:52 2012 +0000
+
+    remove spnegohelp
+
+commit fc2a777d4eb65d9f3bf14f3d6fac1a7d21f94a6a
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Wed Sep 26 20:46:37 2012 +0000
+
+    fixes GSS Negotiate fallback; reformat code for consistency
+
+commit 0cd52c0a5ac46591b0a59b117c37939ec034ac27
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Wed Sep 26 18:56:35 2012 +0000
+
+    NULL ==
+
+commit 68ef07d74e62d04e7c07d5021c7a220a71ee63c4
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Wed Sep 26 18:26:09 2012 +0000
+
+    replace references to unsigned char with u_char since we have it
+
+commit 6f2a2bb8eca53d11844aa83ba50ef43968c0ce98
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Wed Sep 26 17:30:44 2012 +0000
+
+    Revert changes that required gss_nt_krb5_name instead of GSS_C_NT_HOSTBASED_SERVICE
+
+commit 3ed44df57ae51cf2595550acbe65ec6ecb6d2f76
+Author: Sean Noonan <sean.noonan@twosigma.com>
+Date:   Wed Sep 26 17:12:44 2012 +0000
+
+    Work properly when run on non-standard ports
+
+commit 117fbd8b11b9c153fc909797cbae43407f52a754
+Author: Pavel Plesov <pavel.plesov@gmail.com>
+Date:   Wed Feb 15 17:58:35 2012 +0400
+
+    Fix memory allocation in Basic auth
+
+commit c2035a7b1c900491fb3df2ea50f52fcb34f6be2f
+Author: Pavel Plesov <pavel.plesov@gmail.com>
+Date:   Wed Feb 15 17:40:20 2012 +0400
+
+    Fix build and link with MIT Kerberos 1.9.2
+
+commit 6c4193f009614c047f94b68b8e1b0c2ef806836d
+Merge: 3cfbb2d 8ac7acf
+Author: Pavel Plesov <pavel.plesov@gmail.com>
+Date:   Wed Feb 15 18:11:41 2012 +0400
+
+    Merge remote-tracking branch 'muhgatus/master'
+
+commit 3cfbb2d04d992ab69dd51f49bde9827aa4f88693
+Author: Pavel Plesov <pavel.plesov@gmail.com>
+Date:   Wed Feb 15 17:35:29 2012 +0400
+
+    Fix link with local build of spnegohelp
+
+commit 06a9a5feffd8fb164c188f7ffbea40351672df3b
+Merge: d96a011 8c18ff7
+Author: Pavel Plesov <pavel.plesov@gmail.com>
+Date:   Wed Feb 15 18:07:35 2012 +0400
+
+    Merge remote-tracking branch 'solj/master'
+
+commit d96a011d9561bd2a7845e17f4b89309d7c064d8f
+Author: Pavel Plesov <pavel.plesov@gmail.com>
+Date:   Wed Feb 15 13:54:53 2012 +0400
+
+    Add FreeBSD to build configuration
+
+commit 8ac7acf97196c7f8233b88ddabbef1e132182698
+Author: muhgatus <github@abraumhal.de>
+Date:   Wed Feb 8 10:02:14 2012 +0100
+
+    added basic auth via kerberos
+
+commit 8c18ff7bd857ba838ee4136663165ee6e646d001
+Author: Sol Jerome <sol.jerome@gmail.com>
+Date:   Thu Sep 29 17:25:09 2011 -0500
+
+    gitignore: Ignore non-source files
+    
+    Signed-off-by: Sol Jerome <sol.jerome@gmail.com>
+
+commit ba87108541e7b2b1e9470265b74ef93a43f811cf
+Author: Michael Shadle <mike503@gmail.com>
+Date:   Thu Jun 10 02:01:36 2010 -0700
+
+    Minor typo in README
+
+commit 27ff31a356dad663dcc480f9b088520af9ba165a
+Author: Michael Shadle <mike503@gmail.com>
+Date:   Thu Jun 10 01:56:50 2010 -0700
+
+    initial commit, please read README!
