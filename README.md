@@ -20,3 +20,8 @@ Roughly:
  2. `apt-get source nginx`
  3. apply patch `nginx-spnego-deb.patch`
  4. `dpkb-buildpackage -b -us -uc`
+
+## Authorization
+
+To get Active Directory authorization (against groups) in addition to
+authentication, check out this: https://github.com/elonen/ldap_authz_proxy
