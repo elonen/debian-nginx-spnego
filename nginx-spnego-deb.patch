@@ -1,0 +1,64 @@
+diff -NaurE nginx-1.18.0/debian/control nginx-1.18.0_NEW/debian/control
+--- nginx-1.18.0/debian/control	2021-05-29 17:21:37.000000000 +0300
++++ nginx-1.18.0_NEW/debian/control	2023-02-01 21:29:58.491142084 +0200
+@@ -178,6 +178,7 @@
+ Package: nginx-extras
+ Architecture: any
+ Depends: libnginx-mod-http-auth-pam (= ${binary:Version}),
++         libnginx-mod-http-auth-spnego (= ${binary:Version}),
+          libnginx-mod-http-cache-purge (= ${binary:Version}),
+          libnginx-mod-http-dav-ext (= ${binary:Version}),
+          libnginx-mod-http-echo (= ${binary:Version}),
+@@ -343,6 +344,17 @@
+  The module uses PAM as a backend for simple http authentication. It
+  also allows setting the pam service name to allow more fine grained control.
+ 
++Package: libnginx-mod-http-auth-spnego
++Architecture: any
++Depends: ${misc:Depends}, ${shlibs:Depends},
++Recommends: nginx,
++Description: SPNEGO authentication module for Nginx
++ The nginx_http_auth_spnego module enables authentication using SPNEGO.
++ .
++ The module does Kerberos authentication via GSSAPI.
++ It also supports Basic auth (password) as a fallback.
++ Source: https://github.com/stnoonan/spnego-http-auth-nginx-module
++
+ Package: libnginx-mod-http-lua
+ Architecture: any
+ Depends: libnginx-mod-http-ndk (= ${binary:Version}),
+diff -NaurE nginx-1.18.0/debian/libnginx-mod.conf/mod-http-auth-spnego.conf nginx-1.18.0_NEW/debian/libnginx-mod.conf/mod-http-auth-spnego.conf
+--- nginx-1.18.0/debian/libnginx-mod.conf/mod-http-auth-spnego.conf	1970-01-01 02:00:00.000000000 +0200
++++ nginx-1.18.0_NEW/debian/libnginx-mod.conf/mod-http-auth-spnego.conf	2023-02-01 21:31:33.695941661 +0200
+@@ -0,0 +1 @@
++load_module modules/ngx_http_auth_spnego_module.so;
+diff -NaurE nginx-1.18.0/debian/modules/control nginx-1.18.0_NEW/debian/modules/control
+--- nginx-1.18.0/debian/modules/control	2021-05-29 17:21:37.000000000 +0300
++++ nginx-1.18.0_NEW/debian/modules/control	2023-02-01 21:23:19.451794377 +0200
+@@ -72,3 +72,7 @@
+ Files-Excluded: test
+ Version: 1.2.1
+ 
++Module: http-spnego-http-auth-nginx-module
++Homepage: https://github.com/stnoonan/spnego-http-auth-nginx-module
++Version: 1.1+git-bd4e8c3
++Files-Excluded: .gitignore .travis.yml
+diff -NaurE nginx-1.18.0/debian/rules nginx-1.18.0_NEW/debian/rules
+--- nginx-1.18.0/debian/rules	2021-05-29 17:21:37.000000000 +0300
++++ nginx-1.18.0_NEW/debian/rules	2023-02-01 21:26:52.253578791 +0200
+@@ -8,6 +8,7 @@
+ FLAVOURS := core light extras
+ DYN_MODS := \
+ 	http-auth-pam \
++	http-auth-spnego \
+ 	http-cache-purge \
+ 	http-dav-ext \
+ 	http-echo \
+@@ -116,6 +117,7 @@
+ 			--with-stream_ssl_preread_module \
+ 			--add-dynamic-module=$(MODULESDIR)/http-headers-more-filter \
+ 			--add-dynamic-module=$(MODULESDIR)/http-auth-pam \
++			--add-dynamic-module=$(MODULESDIR)/http-auth-spnego \
+ 			--add-dynamic-module=$(MODULESDIR)/http-cache-purge \
+ 			--add-dynamic-module=$(MODULESDIR)/http-dav-ext \
+ 			--add-dynamic-module=$(MODULESDIR)/http-ndk \
