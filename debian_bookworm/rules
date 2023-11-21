@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+include /usr/share/dpkg/architecture.mk
+
+%:
+	dh $@
+
+override_dh_auto_test:
+	dh_auto_test --buildsystem=nginx_mod -- ndk_http_module.so

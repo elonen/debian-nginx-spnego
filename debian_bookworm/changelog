@@ -1,0 +1,5 @@
+libnginx-mod-http-auth-spnego (1.1+git-bd4e8c3+deb12) unstable; urgency=medium
+
+  * Debian build update for Bookworm
+
+ -- Jarno Elonen <elonen@iki.fi>  Tue, 21 Nov 2023 18:21:38 +0300
