@@ -4,15 +4,18 @@ Scripts for building a fresh Debian package
 `libnginx-mod-http-auth-spnego` from latest version of
 https://github.com/stnoonan/spnego-http-auth-nginx-module
 
-Run `./build-in-docker.sh`, and it will setup Debian Bullseye, patch,
-compile and finally spit out the `.deb` in current directory.
-
-The only dependency is Docker, everything else will be installed inside it
-as necessary.
+Run `./build-in-docker.sh`, and it will build `.deb` files for Debian Bullseye and Bookworm on AMD64 and ARM64.
+The only dependency is Docker, everything else will be installed inside it as necessary.
 
 ## What does it do?
 
-Simply injects the latest spnego module into Debian Nginx source package
+### 1. On Bookworm (Debian 12)
+
+Simply adds a minimal `debian/` directory and builds the package as usual with `dpkb-buildpackage`.
+
+### 2. On Bullseye (Debian 11)
+
+Injects the latest spnego module into Debian Nginx source package
 (maintained at https://salsa.debian.org/nginx-team/nginx) and recompiles.
 Roughly:
 
